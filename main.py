@@ -11,6 +11,7 @@ import datetime
 import time
 import numpy as np
 import imutils
+import asyncio
 import cv2
 import os
 import csv
@@ -75,8 +76,9 @@ if os.path.getsize('processed_data/crowd_data.csv') == 0:
 	crowd_data_writer.writerow(['Time', 'Human Count', 'Social Distance violate', 'Restricted Entry', 'Abnormal Activity'])
 
 START_TIME = time.time()
+loop = asyncio.get_event_loop()
 
-processing_FPS = video_process(cap, FRAME_SIZE, net, ln, encoder, tracker, movement_data_writer, crowd_data_writer)
+processing_FPS = loop.run_until_complete(video_process(cap, FRAME_SIZE, net, ln, encoder, tracker, movement_data_writer, crowd_data_writer))
 
 cv2.destroyAllWindows()
 movement_data_file.close()
