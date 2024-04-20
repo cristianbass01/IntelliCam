@@ -15,7 +15,7 @@ YOLO_CONFIG = {
 	"CONFIG_PATH" : "YOLOv4-tiny/yolov4-tiny.cfg"
 }
 # Show individuals detected
-SHOW_PROCESSING_OUTPUT = True
+SHOW_PROCESSING_OUTPUT = False
 # Show individuals detected
 SHOW_DETECT = True
 # Data record
