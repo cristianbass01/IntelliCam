@@ -66,7 +66,8 @@ def _end_video(tracker, frame_count, movement_data_writer):
 async def send_frame(session, url, frame):
 
 	#gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-	_, img_encoded = cv2.imencode('.jpg', frame, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
+	resized_frame = cv2.resize(frame, (640, 480))
+	_, img_encoded = cv2.imencode('.jpg', resized_frame, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
 	async with session.post(url, data=img_encoded.tobytes()) as response:
 		print(await response.text())
 		
@@ -281,7 +282,7 @@ async def video_process(cap, frame_size, net, ln, encoder, tracker, movement_dat
 
 			# turn frame into gray
 			
-			loop.create_task(await send_frame(session, 'http://localhost:5000/video_feed', frame))
+			loop.create_task(await send_frame(session, 'https://backend-aeh7hwqzuq-oe.a.run.app/video_feed', frame))
 			
 			
 
