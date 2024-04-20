@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1032257407388",
+    "project_id": "ai-shield-app",
+    "storage_bucket": "ai-shield-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032257407388:android:e2ef8265270b261a0b2059",
+        "android_client_info": {
+          "package_name": "com.example.ai_shield_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032257407388-sqnjvuqv379fjnhkbi3suoiq04mlta58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqLBKh67wabMnYFtQ8gCizbhmM3thVIJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032257407388-sqnjvuqv379fjnhkbi3suoiq04mlta58.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1032257407388-b41ni78o1sdrh6tn3aecmi21en040k4k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aiShieldApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
