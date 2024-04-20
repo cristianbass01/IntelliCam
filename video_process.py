@@ -70,6 +70,37 @@ async def send_frame(session, url, frame):
 	_, img_encoded = cv2.imencode('.jpg', resized_frame, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
 	async with session.post(url, data=img_encoded.tobytes()) as response:
 		print(await response.text())
+
+def create_red_gradient(width, height, horizontal=True):
+    """Create a linear red gradient image."""
+    if horizontal:
+        # Horizontal gradient
+        gradient = np.zeros((height, width, 3), dtype=np.uint8)
+        gradient[:, :, 2] = np.tile(np.linspace(0, 255, width, dtype=np.uint8), (height, 1))
+    else:
+        # Vertical gradient
+        gradient = np.zeros((width, height, 3), dtype=np.uint8)
+        gradient[:, :, 2] = np.tile(np.linspace(0, 255, height, dtype=np.uint8), (width, 1))
+        gradient = np.transpose(gradient, (1, 0, 2))  # transpose to switch to vertical
+    return gradient
+
+
+def apply_red_gradient_border(frame, border_size=20):
+    height, width = frame.shape[:2]
+    # Create red gradient images for all sides
+    top_gradient = create_red_gradient(width, border_size, horizontal=True)
+    bottom_gradient = cv2.flip(top_gradient, 0)  # Flip top gradient to get bottom gradient
+    left_gradient = create_red_gradient(border_size, height, horizontal=False)
+    right_gradient = cv2.flip(left_gradient, 1)  # Flip left gradient to get right gradient
+
+    # Apply red gradients to the borders
+    frame[:border_size, :] = cv2.addWeighted(frame[:border_size, :], 0.5, top_gradient, 0.5, 0)
+    frame[-border_size:, :] = cv2.addWeighted(frame[-border_size:, :], 0.5, bottom_gradient, 0.5, 0)
+    frame[:, :border_size] = cv2.addWeighted(frame[:, :border_size], 0.5, left_gradient, 0.5, 0)
+    frame[:, -border_size:] = cv2.addWeighted(frame[:, -border_size:], 0.5, right_gradient, 0.5, 0)
+
+    return frame
+
 		
 
 async def video_process(cap, frame_size, net, ln, encoder, tracker, movement_data_writer, crowd_data_writer):
@@ -254,6 +285,9 @@ async def video_process(cap, frame_size, net, ln, encoder, tracker, movement_dat
 					if display_frame_count % 3 != 0:
 						cv2.putText(frame, "ABNORMAL ACTIVITY", (130, 250),
 							cv2.FONT_HERSHEY_SIMPLEX, 1.5, RGB_COLORS["blue"], 5)
+						thickness = 30
+						height, width = frame.shape[:2]
+						frame = apply_red_gradient_border(frame, border_size=50)
 
 			# Display crowd count on screen
 			if SHOW_DETECT:
