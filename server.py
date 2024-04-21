@@ -43,12 +43,11 @@ async def handle_post(request):
 
 
 async def get_endpoints(request):
-    endpoints = [
-        "https://backend-aeh7hwqzuq-oe.a.run.app/",
-        "https://backend-aeh7hwqzuq-ue.a.run.app/",
-    ]
-    return web.json_response({"endpoints": endpoints, "status": 200})
-
+    endpoints = ['https://backend-aeh7hwqzuq-oe.a.run.app/',
+                 'https://static-aeh7hwqzuq-oe.a.run.app/video3',
+                 'https://static-aeh7hwqzuq-oe.a.run.app/video1',
+                 'https://static-aeh7hwqzuq-oe.a.run.app/video2']
+    return web.json_response({'endpoints': endpoints, 'status': 200})
 
 async def start_background_tasks(app):
     app["frame_queue"] = asyncio.Queue()
