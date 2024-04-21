@@ -15,7 +15,7 @@ YOLO_CONFIG = {
 	"CONFIG_PATH" : "YOLOv4-tiny/yolov4-tiny.cfg"
 }
 # Show individuals detected
-SHOW_PROCESSING_OUTPUT = False
+SHOW_PROCESSING_OUTPUT = True
 # Show individuals detected
 SHOW_DETECT = True
 # Data record
@@ -34,15 +34,15 @@ SHOW_VIOLATION_COUNT = False
 # Show tracking id
 SHOW_TRACKING_ID = False
 # Threshold for distance violation
-SOCIAL_DISTANCE = 50
+SOCIAL_DISTANCE = 5
 # Check for abnormal crowd activity
 ABNORMAL_CHECK = True
 # Min number of people to check for abnormal
-ABNORMAL_MIN_PEOPLE = 2
+ABNORMAL_MIN_PEOPLE = 1
 # Abnormal energy level threshold
-ABNORMAL_ENERGY = 83
+ABNORMAL_ENERGY = 90
 # Abnormal activity ratio threhold
-ABNORMAL_THRESH = 0.66
+ABNORMAL_THRESH = 0.76
 # Threshold for human detection minumun confindence
 MIN_CONF = 0.3
 # Threshold for Non-maxima surpression
