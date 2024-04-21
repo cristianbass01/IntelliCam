@@ -1,12 +1,11 @@
-import 'dart:math';
-
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ai_shield_app/api/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ai_shield_app/settings/navigation.dart';
 import 'package:ai_shield_app/settings/themes.dart';
 
-import 'package:ai_shield_app/widgets/video_box.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+
 import 'package:ai_shield_app/api/video.dart';
 import 'package:provider/provider.dart';
 
@@ -34,52 +33,90 @@ class _SurveillancePageState extends State<SurveillancePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Surveillance'),
-        automaticallyImplyLeading: false,
+        title: const Text('Security WebCams'),
         leading: IconButton(
-          icon: const Icon(Icons.person),
-          onPressed: () {
-            context.push(NavigationHelper.homePath);
-          },
-        ),
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                context.push(NavigationHelper.homePath);
+              },
+            ),
         actions: [
-          Text(themeProvider.themeData.brightness == Brightness.light ? 'Light' : 'Dark'),
-          Switch(
-            value: themeProvider.themeData.brightness == Brightness.dark,
-            onChanged: (value) {
-              themeProvider.toggleTheme();
-            },
-          ),
-          const SizedBox(width: 10),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () async {
-              context.push(NavigationHelper.homePath);
-              await FirebaseAuth.instance.signOut();
+              bool success = await AuthApi.logout(context);
+              if (mounted && success){
+                context.push(NavigationHelper.homePath);
+              }
             },
           ),
-          
         ],
-        toolbarHeight: 50,
       ),
       body: Center(
         child: 
           _isLoading 
           ? const CircularProgressIndicator()
-          : Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: List.generate(videosCount, (index) {
-              VideoBox videoBox = VideoBox(
-                videoPath: videoStringUrls[index],
-              );
-              return SizedBox(
-                width: MediaQuery.of(context).size.width / sqrt(videosCount) - 10 * sqrt(videosCount),
-                height: MediaQuery.of(context).size.height / (videosCount / sqrt(videosCount)) - 10 * (videosCount / sqrt(videosCount)) - 50,
-                child: videoBox,
-              );
-            }),
+          : SingleChildScrollView(
+            child: Wrap(
+              spacing: 15,
+              runSpacing: 20,
+              children: List.generate(videosCount, (index) {
+                final webScreen = InAppWebView(
+                  initialUrlRequest: URLRequest(url: WebUri.uri(Uri.parse(videoStringUrls[index]))),
+                );
+                
+                return SizedBox(
+                  width: 640,
+                  height: 480,
+                  child: webScreen,
+                );
+              }),
+            ),
           ),
+      ),
+    floatingActionButton: FloatingActionButton.extended(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Alert the police?'),
+              content: const Text('Are you sure you want to alert the police?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Police have been alerted.'),
+                      ),
+                    );
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }, 
+      label: const Text(
+        'Allert the police!', 
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.white,
+          ),
+      ),
+      icon: const Icon(
+        Icons.call, 
+        color: Colors.white
+        ),
+      backgroundColor: Colors.red,
       ),
     );
   }

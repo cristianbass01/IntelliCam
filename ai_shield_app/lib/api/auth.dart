@@ -98,6 +98,7 @@ class AuthApi {
 
   static bool isLoggedIn() {
     try {
+      
       return FirebaseAuth.instance.currentUser != null;
     } catch (e) {
       return false;

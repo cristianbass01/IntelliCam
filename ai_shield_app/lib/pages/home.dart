@@ -50,7 +50,7 @@ class HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Welcome to AI Shield!',
+                          'Welcome to IntelliCam!',
                           style: Theme.of(context).textTheme.displayLarge!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -58,27 +58,29 @@ class HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(height: 50),
                         Text(
-                          'Real-Time AI-Security',
+                          'Real-Time WebCam AI-Security',
                           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 30),
                         Text(
-                          "Our AI-powered security system provides real-time risk analysis and rapid threat response.\n\nWe help public and private companies identify and address potential dangers, ensuring a safer environment with quicker incident resolution.",
+                          "Our AI-powered security system provides real-time risk analysis and rapid threat response.",
                           style: Theme.of(context).textTheme.bodyLarge,
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 40),
-                        Text(
-                          'Join us today to experience the future of security!',
-                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
                         const SizedBox(height: 50),
+                        Text(
+                          'Join us today to experience the future of webcam security!',
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontStyle: FontStyle.italic,  
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 60),
                         
-                        AuthApi.isLoggedIn() 
+                        AuthApi.isLoggedIn()
                         ? FilledButton(
                             onPressed: () {
                               context.push(NavigationHelper.surveillancePath);

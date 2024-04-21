@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThemeProvider with ChangeNotifier {
 
-  ThemeData _currentTheme = lightMode;
-
+  ThemeData _currentTheme = lightMode;  
+  
   ThemeData get themeData => _currentTheme;
 
   set themeData(ThemeData theme) {
@@ -13,7 +13,7 @@ class ThemeProvider with ChangeNotifier {
   }
   
   void toggleTheme() {
-    if (_currentTheme == lightMode) {
+    if (_currentTheme.brightness == Brightness.light) {
       _currentTheme = darkMode;
     } else {
       _currentTheme = lightMode;
