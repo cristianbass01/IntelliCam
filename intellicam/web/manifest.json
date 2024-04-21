@@ -1,7 +1,7 @@
 {
-    "name": "ai_shield_app",
-    "short_name": "ai_shield_app",
-    "start_url": ".",
+    "name": "IntelliCam",
+    "short_name": "IntelliCam",
+    "start_url": "/home",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
