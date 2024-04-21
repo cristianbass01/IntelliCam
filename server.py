@@ -31,6 +31,10 @@ async def handle_post(request):
     await request.app['frame_queue'].put(buffer.tobytes())
     return web.Response(text='Frame received', status=200)
 
+async def get_endpoints(request):
+    endpoints = ['https://backend-aeh7hwqzuq-oe.a.run.app/', 'https://backend-aeh7hwqzuq-ue.a.run.app/']
+    return web.json_response({'endpoints': endpoints, 'status': 200})
+
 async def start_background_tasks(app):
     app['frame_queue'] = asyncio.Queue()
 
@@ -42,7 +46,9 @@ app.on_startup.append(start_background_tasks)
 app.on_cleanup.append(cleanup_background_tasks)
 app.add_routes([web.get('/', index),
                 web.get('/video_feed', video_feed),
-                web.post('/video_feed', handle_post)])
+                web.get('/endpoints', get_endpoints),
+                web.post('/video_feed', handle_post),
+                ])
 
 if __name__ == '__main__':
-    web.run_app(app, host='0.0.0.0', port=5000)
+    web.run_app(app, host='0.0.0.0', port=8000)
