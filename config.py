@@ -2,10 +2,10 @@ import datetime
 
 # Video Path
 VIDEO_CONFIG = {
-	"VIDEO_CAP" : 0,
-	"IS_CAM" : True,
+	"VIDEO_CAP": '/home/camile/ai-shield/videos/video_ny.mp4',
+	"IS_CAM" : False,
 	"CAM_APPROX_FPS": 3,
-	"HIGH_CAM": False,
+	"HIGH_CAM": True,
 	"START_TIME": datetime.datetime(2020, 11, 5, 0, 0, 0, 0)
 }
 
@@ -15,7 +15,7 @@ YOLO_CONFIG = {
 	"CONFIG_PATH" : "YOLOv4-tiny/yolov4-tiny.cfg"
 }
 # Show individuals detected
-SHOW_PROCESSING_OUTPUT = False
+SHOW_PROCESSING_OUTPUT = True
 # Show individuals detected
 SHOW_DETECT = True
 # Data record
@@ -34,19 +34,19 @@ SHOW_VIOLATION_COUNT = False
 # Show tracking id
 SHOW_TRACKING_ID = False
 # Threshold for distance violation
-SOCIAL_DISTANCE = 50
+SOCIAL_DISTANCE = 30
 # Check for abnormal crowd activity
 ABNORMAL_CHECK = True
 # Min number of people to check for abnormal
-ABNORMAL_MIN_PEOPLE = 2
+ABNORMAL_MIN_PEOPLE = 30
 # Abnormal energy level threshold
-ABNORMAL_ENERGY = 83
+ABNORMAL_ENERGY = 1866
 # Abnormal activity ratio threhold
-ABNORMAL_THRESH = 0.66
+ABNORMAL_THRESH = 0.40
 # Threshold for human detection minumun confindence
 MIN_CONF = 0.3
 # Threshold for Non-maxima surpression
-NMS_THRESH = 0.2
+NMS_THRESH = 0.1
 # Resize frame for processing
 FRAME_SIZE = 1920
 # Tracker max missing age before removing (seconds)
