@@ -34,19 +34,19 @@ SHOW_VIOLATION_COUNT = False
 # Show tracking id
 SHOW_TRACKING_ID = False
 # Threshold for distance violation
-SOCIAL_DISTANCE = 5
+SOCIAL_DISTANCE = 50
 # Check for abnormal crowd activity
 ABNORMAL_CHECK = True
 # Min number of people to check for abnormal
-ABNORMAL_MIN_PEOPLE = 1
+ABNORMAL_MIN_PEOPLE = 2
 # Abnormal energy level threshold
-ABNORMAL_ENERGY = 90
+ABNORMAL_ENERGY = 83
 # Abnormal activity ratio threhold
-ABNORMAL_THRESH = 0.76
+ABNORMAL_THRESH = 0.66
 # Threshold for human detection minumun confindence
 MIN_CONF = 0.3
 # Threshold for Non-maxima surpression
-NMS_THRESH = 0.2
+NMS_THRESH = 0.1
 # Resize frame for processing
 FRAME_SIZE = 1920
 # Tracker max missing age before removing (seconds)
