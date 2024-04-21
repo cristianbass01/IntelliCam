@@ -2,17 +2,17 @@ import datetime
 
 # Video Path
 VIDEO_CONFIG = {
-	"VIDEO_CAP" : 0,
-	"IS_CAM" : True,
-	"CAM_APPROX_FPS": 3,
-	"HIGH_CAM": False,
-	"START_TIME": datetime.datetime(2020, 11, 5, 0, 0, 0, 0)
+    "VIDEO_CAP": 0,
+    "IS_CAM": True,
+    "CAM_APPROX_FPS": 3,
+    "HIGH_CAM": False,
+    "START_TIME": datetime.datetime(2020, 11, 5, 0, 0, 0, 0),
 }
 
 # Load YOLOv3-tiny weights and config
 YOLO_CONFIG = {
-	"WEIGHTS_PATH" : "YOLOv4-tiny/yolov4-tiny.weights",
-	"CONFIG_PATH" : "YOLOv4-tiny/yolov4-tiny.cfg"
+    "WEIGHTS_PATH": "YOLOv4-tiny/yolov4-tiny.weights",
+    "CONFIG_PATH": "YOLOv4-tiny/yolov4-tiny.cfg",
 }
 # Show individuals detected
 SHOW_PROCESSING_OUTPUT = True
@@ -25,8 +25,8 @@ DATA_RECORD_RATE = 5
 # Check for restricted entry
 RE_CHECK = False
 # Restricted entry time (H:M:S)
-RE_START_TIME = datetime.time(0,0,0) 
-RE_END_TIME = datetime.time(23,0,0)
+RE_START_TIME = datetime.time(0, 0, 0)
+RE_END_TIME = datetime.time(23, 0, 0)
 # Check for social distance violation
 SD_CHECK = False
 # Show violation count
